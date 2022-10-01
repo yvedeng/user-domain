@@ -1,12 +1,19 @@
 using FluentValidation;
-using User.Contracts.Authentication;
 
-namespace User.Api.Validations;
+namespace User.Application.Authentication.Commands.Register;
 
-public class RegisterUserValidator: AbstractValidator<RegisterRequest>
+public class RegisterCommandValidator: AbstractValidator<RegisterCommand>
 {
-    public RegisterUserValidator()
+    public RegisterCommandValidator()
     {
+        RuleFor(x => x.FirstName)
+            .NotNull()
+            .NotEmpty();
+
+        RuleFor(x => x.LastName)
+            .NotNull()
+            .NotEmpty();
+        
         RuleFor(x => x.Email)
             .NotNull()
             .NotEmpty()
