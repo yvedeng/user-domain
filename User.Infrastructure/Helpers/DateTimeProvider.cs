@@ -1,4 +1,4 @@
-using User.Application.Common.Interfaces.Services;
+using User.Application.Common.Interfaces.Helpers;
 
 namespace User.Infrastructure.Helpers;
 

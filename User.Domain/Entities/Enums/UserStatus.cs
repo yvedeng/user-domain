@@ -1,8 +1,8 @@
-namespace User.Domain.Entities;
+namespace User.Domain.Entities.Enums;
 
 public enum UserStatus
 {
     Active,
     Blocked,
-    PendingDeletion
+    Inactive
 }

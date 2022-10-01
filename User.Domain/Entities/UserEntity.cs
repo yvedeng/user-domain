@@ -1,6 +1,9 @@
+using User.Domain.Entities.Enums;
+using User.Domain.Entities.Interfaces;
+
 namespace User.Domain.Entities;
 
-public class UserEntity
+public class UserEntity: IMutableEntity
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string UserName { get; set; } = null!;

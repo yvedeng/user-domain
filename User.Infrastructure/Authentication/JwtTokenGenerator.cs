@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using User.Application.Common.Interfaces.Authentication;
-using User.Application.Common.Interfaces.Services;
+using User.Application.Common.Interfaces.Helpers;
 using User.Domain.Entities;
 
 namespace User.Infrastructure.Authentication;
@@ -34,7 +34,7 @@ public class JwtTokenGenerator: IJwtTokenGenerator
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 
         var securityToken = new JwtSecurityToken(
