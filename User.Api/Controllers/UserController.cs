@@ -7,7 +7,7 @@ using User.Contracts.User;
 namespace User.Api.Controllers;
 
 [Route("[controller]")]
-public class UserController: ApiController
+public class UserController: ApiControllerBase
 {
     private readonly ISender _mediator;
     private readonly IMapper _mapper;

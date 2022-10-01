@@ -11,7 +11,7 @@ namespace User.Api.Controllers;
 
 [Route("auth")]
 [AllowAnonymous]
-public class AuthenticationController: ApiController
+public class AuthenticationController: ApiControllerBase
 {
     private readonly ISender _mediator;
     private readonly IMapper _mapper;
