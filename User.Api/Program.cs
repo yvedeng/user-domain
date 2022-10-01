@@ -1,17 +1,13 @@
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using User.Api.Common.Errors;
+using User.Api;
 using User.Application;
 using User.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
+        .AddPresentation()
         .AddApplication()
         .AddInfrastructure(builder.Configuration);
-    
-    builder.Services.AddControllers();
-    
-    builder.Services.AddSingleton<ProblemDetailsFactory, UserProblemDetailsFactory>();
 }
 
 var app = builder.Build();
