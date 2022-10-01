@@ -1,4 +1,7 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using User.Api.Common;
 using User.Api.Common.Errors;
 using User.Api.Common.Mapping;
 
@@ -11,6 +14,9 @@ public static class DependencyInjection
         services.AddSingleton<ProblemDetailsFactory, UserProblemDetailsFactory>();
         services.AddMappings();
         services.AddControllers();
+
+        services.AddFluentValidationAutoValidation();
+        services.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();
         
         return services;
     }

@@ -1,9 +1,9 @@
-using Mapster;
+using FluentValidation;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using User.Application.Authentication.Commands.Register;
-using User.Application.Authentication.Common;
 using User.Application.Authentication.Queries.Login;
 using User.Contracts.Authentication;
 
@@ -25,8 +25,22 @@ public class AuthenticationController: ApiController
     }
     
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterAsync(RegisterRequest request)
+    public async Task<IActionResult> RegisterAsync(
+        RegisterRequest request, 
+        [FromServices] IValidator<RegisterRequest> validator)
     {
+        var validationResult = await validator.ValidateAsync(request);
+        if (!validationResult.IsValid)
+        {
+            var modelStateDictionary = new ModelStateDictionary();
+            foreach (var failure in validationResult.Errors)
+            {
+                modelStateDictionary.AddModelError(
+                    failure.PropertyName, 
+                    failure.ErrorMessage);
+            }
+            return ValidationProblem(modelStateDictionary);
+        }
         var command = _mapper.Map<RegisterCommand>(request);
         var registerResult = await _mediator.Send(command);
         
@@ -39,6 +53,11 @@ public class AuthenticationController: ApiController
     [HttpPost("login")]
     public async Task<IActionResult> LoginAsync(LoginRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            return ValidationProblem(ModelState);
+        }
+        
         var query = _mapper.Map<LoginQuery>(request);
         var loginResult = await _mediator.Send(query);
 
