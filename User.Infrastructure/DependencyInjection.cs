@@ -8,8 +8,8 @@ using User.Application.Common.Interfaces.Authentication;
 using User.Application.Common.Interfaces.Persistence;
 using User.Application.Common.Interfaces.Services;
 using User.Infrastructure.Authentication;
+using User.Infrastructure.Helpers;
 using User.Infrastructure.Persistence;
-using User.Infrastructure.Services;
 
 namespace User.Infrastructure;
 
